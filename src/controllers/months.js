@@ -9,18 +9,21 @@ class Months {
 
   static _getDates() {
     var months = []
+    var formatDate = this._getFormattedDate
 
     this.records.forEach(function (record){
       const date = new Date(record['paymentDate'])
-      const currentMonth = (date.getMonth() + 1)
-      const year = date.getFullYear()
-      const formattedDate = currentMonth + "/01/" + year
-      
-  
+      const formattedDate = formatDate(date)
       if(!months.includes(formattedDate)){ months.push(formattedDate) }
     })
 
     return months
+  }
+
+  static _getFormattedDate(date){
+    const month = (date.getMonth() + 1)
+    const year = date.getFullYear()
+    return month + "/01/" + year
   }
 }
 
