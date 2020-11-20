@@ -13,7 +13,7 @@ router.get('/categories', async (req, res, next) => {
 
 router.get('/cashflow', async (req, res, next) => {
   try {
-    res.status(501).json({ message: 'Not Implemented' });
+    res.status(200).json({ message: 'Page available' });
   } catch (err) {
     return next(err);
   }
