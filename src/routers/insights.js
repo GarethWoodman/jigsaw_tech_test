@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 var categories = require('../controllers/categories')
-var months = require('../controllers/months')
+var months = require('../controllers/dates')
 
 router.get('/categories', async (req, res, next) => {
   try {

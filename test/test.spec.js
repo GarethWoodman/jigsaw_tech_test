@@ -4,7 +4,7 @@ const rp = require('request-promise');
 
 const api = require('../src/api')
 const categories = require('../src/controllers/categories')
-const months = require('../src/controllers/months')
+const months = require('../src/controllers/dates')
 
 chai.should();
 
@@ -54,18 +54,18 @@ describe('Insights Service', () => {
       });
     });
 
-    context('get categories', () => {      
+    context('gets categories', () => {      
       const allCategories = ['Food', 'Miscellaneous', 'Charity', 'Travel', 'Transport']
 
-      it('has all categories', async () => {
+      it('returns all categories', async () => {
         expect(categories.allNames.sort).to.equal(allCategories.sort)
       })
     })
 
-    context('get aggregated List', () => {
-      it('returns aggregated list of first category', async () => {
-        const resultFromCategories = JSON.stringify(categories.getAggregatedList()[0])
-        expect(resultFromCategories).to.equal(categoryRecord)
+    context('get aggregated list of category', () => {
+      it('returns aggregated list of categories', async () => {
+        const resultFromCategories = JSON.stringify(categories.getAggregatedList())
+        expect(resultFromCategories.includes(categoryRecord)).to.equal(true)
       })
     })
   });
@@ -86,14 +86,14 @@ describe('Insights Service', () => {
         response.statusCode.should.equal(200);
       });
 
-      it('returns json data of aggregated months', async () => {
+      it('returns json data of aggregated dates', async () => {
         const response = await request('/cashflow');
         const data = JSON.stringify(response.body)
         expect(data.includes(monthRecord)).to.equal(true)
       });
     });
 
-    context('get dates', () => {
+    context('gets dates', () => {
       const firstDate = '01/10/2020'
       const lastDate = '01/11/2020'
 
@@ -105,8 +105,8 @@ describe('Insights Service', () => {
       })
     })
 
-    context('get breakdown of spending by month', () => {
-      it('returns aggregated list of spending by month', () => {
+    context('get aggregated list of date', () => {
+      it('returns aggregated list of spending by date', () => {
         const resultsFromMonths = JSON.stringify(months.getAggregatedList())
         expect(resultsFromMonths.includes(monthRecord)).to.equal(true)
       })

@@ -1,7 +1,7 @@
 const api = require('../api')
 const values = require('../helpers/values')
 
-class Months {
+class Dates {
   static async initialize() {
     // Get api data then initialize attributes
     await api.getData()
@@ -70,4 +70,4 @@ class Months {
   }
 }
 
-module.exports = Months;
+module.exports = Dates;
