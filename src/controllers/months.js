@@ -1,4 +1,5 @@
 const api = require('../api')
+var values = require('../helpers/values')
 
 class Months {
   static async initialize() {
@@ -13,26 +14,16 @@ class Months {
     var formatDate = this._getFormattedDate
 
     this.allDates.forEach(function (month){
-      let totalNumber = 0
-      let totalValue = 0
+      values.reset()
     
       records.forEach(function (record){
         const date = new Date(record['paymentDate'])
         const formattedDate = formatDate(date)
 
-        if(Date.parse(formattedDate) === Date.parse(month)){ 
-          totalNumber += 1
-          totalValue += record['amount']
-        }
+        if(Date.parse(formattedDate) === Date.parse(month)){ values.add(record['amount']) }
       })
 
-      var result = {}
-      result[month] = {
-        "totalNumber": totalNumber, 
-        "totalValue": totalValue, 
-        "averageValue": (totalValue / totalNumber)
-      }
-      results.push(result)
+      results.push(values.getResult(month))
     })
 
     return results
