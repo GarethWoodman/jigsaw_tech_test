@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 var categories = require('../controllers/categories')
-var months = require('../controllers/dates')
+var dates = require('../controllers/dates')
 
 router.get('/categories', async (req, res, next) => {
   try {
@@ -14,8 +14,8 @@ router.get('/categories', async (req, res, next) => {
 
 router.get('/cashflow', async (req, res, next) => {
   try {
-    await months.initialize()
-    res.status(200).json(months.getAggregatedList());
+    await dates.initialize()
+    res.status(200).json(dates.getAggregatedList());
   } catch (err) {
     return next(err);
   }

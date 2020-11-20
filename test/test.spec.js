@@ -4,7 +4,7 @@ const rp = require('request-promise');
 
 const api = require('../src/api')
 const categories = require('../src/controllers/categories')
-const months = require('../src/controllers/dates')
+const dates = require('../src/controllers/dates')
 
 chai.should();
 
@@ -20,7 +20,7 @@ async function request(path) {
 
 describe('Insights Service', () => {
   beforeEach( async function() {
-    await months.initialize()
+    await dates.initialize()
     await categories.initialize()
   });
 
@@ -98,17 +98,17 @@ describe('Insights Service', () => {
       const lastDate = '04/11/2020'
 
       it('has first date', () => {
-        expect(months.allDates.includes(firstDate)).to.equal(true)
+        expect(dates.allDates.includes(firstDate)).to.equal(true)
       })
       it('has last date', () => {
-        expect(months.allDates.includes(lastDate)).to.equal(true)
+        expect(dates.allDates.includes(lastDate)).to.equal(true)
       })
     })
 
     context('get aggregated list of date', () => {
       it('returns aggregated list of spending by date', () => {
-        const resultsFromMonths = JSON.stringify(months.getAggregatedList())
-        expect(resultsFromMonths.includes(monthRecord)).to.equal(true)
+        const resultsFromdates = JSON.stringify(dates.getAggregatedList())
+        expect(resultsFromdates.includes(monthRecord)).to.equal(true)
       })
     })
   });
