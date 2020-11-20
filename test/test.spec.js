@@ -100,7 +100,7 @@ describe('Insights Service', () => {
       it('has first date', () => {
         expect(months.allDates.includes(firstDate)).to.equal(true)
       })
-      it('has first date', () => {
+      it('has last date', () => {
         expect(months.allDates.includes(lastDate)).to.equal(true)
       })
     })
