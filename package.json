@@ -10,6 +10,7 @@
   "author": "jigsaw.xyz",
   "license": "UNLICENSED",
   "dependencies": {
+    "cross-fetch": "^3.0.6",
     "express": "^4.16.4"
   },
   "devDependencies": {
