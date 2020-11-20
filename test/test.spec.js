@@ -1,5 +1,7 @@
+const { expect } = require('chai');
 const chai = require('chai');
 const rp = require('request-promise');
+const api = require('../src/api')
 
 chai.should();
 
@@ -14,6 +16,13 @@ async function request(path) {
 }
 
 describe('Insights Service', () => {
+  describe('Api', () => {
+    it('gets data from API', async () => {
+      await api.getData()
+      expect(api.data.length).to.not.equal(0)
+    })
+  })
+
   describe('/categories', () => {
     context('it is yet to be implemented', () => {
       it('should return a 501 error', async () => {
@@ -22,6 +31,7 @@ describe('Insights Service', () => {
       });
     });
   });
+
   describe('/cashflow', () => {
     context('it is yet to be implemented', () => {
       it('should return a 501 error', async () => {
