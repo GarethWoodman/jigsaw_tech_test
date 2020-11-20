@@ -24,10 +24,10 @@ describe('Insights Service', () => {
   })
 
   describe('/categories', () => {
-    context('it is yet to be implemented', () => {
-      it('should return a 501 error', async () => {
+    context('gets page', () => {
+      it('returns 200', async () => {
         const response = await request('/categories');
-        response.statusCode.should.equal(501);
+        response.statusCode.should.equal(200);
       });
     });
   });

@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/categories', async (req, res, next) => {
   try {
-    res.status(501).json({ message: 'Not Implemented' });
+    res.status(200).json({ message: "page available" });
   } catch (err) {
     return next(err);
   }
