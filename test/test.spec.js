@@ -72,10 +72,10 @@ describe('Insights Service', () => {
 
   describe('/cashflow', () => {
     let monthRecord = {
-      "10/01/2020": {
-        "totalNumber":22,
-        "totalValue":2923,
-        "averageValue":132.86363636363637
+      "12/10/2020": {
+        "totalNumber":2,
+        "totalValue":47,
+        "averageValue":23.5
       }
     }
     monthRecord = JSON.stringify(monthRecord)
@@ -102,8 +102,8 @@ describe('Insights Service', () => {
 
     context('get breakdown of spending by month', () => {
       it('returns aggregated list of spending by month', () => {
-        const resultFromMonths = JSON.stringify(months.getAggregatedList()[0])
-        expect(resultFromMonths).to.equal(monthRecord)
+        const resultsFromMonths = JSON.stringify(months.getAggregatedList())
+        expect(resultsFromMonths.includes(monthRecord)).to.equal(true)
       })
     })
   });

@@ -11,10 +11,16 @@ class Values {
 
   static getResult(attribute) {
     var result = {}
+    var averageValue = this.totalValue / this.totalNumber
+
+    if (this.totalNumber == 0 || this.totalValue == 0) {
+      averageValue = 0
+    }
+
     result[attribute] = {
       "totalNumber": this.totalNumber, 
       "totalValue": this.totalValue, 
-      "averageValue": (this.totalValue / this.totalNumber)
+      "averageValue": averageValue
     }
     this.reset()
     return result
