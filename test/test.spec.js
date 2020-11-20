@@ -31,6 +31,21 @@ describe('Insights Service', () => {
         const response = await request('/categories');
         response.statusCode.should.equal(200);
       });
+
+      it('returns json data of aggregated categories', async () => {
+        const response = await request('/categories');
+        const data = response.body
+
+        const result = {
+          "Food": {
+            "totalNumber":24,
+            "totalValue":2679,
+            "averageValue":111.625
+          }
+        }
+
+        expect(JSON.stringify(data).includes(JSON.stringify(result))).to.equal(true)
+      });
     });
 
     context('get categories', () => {      

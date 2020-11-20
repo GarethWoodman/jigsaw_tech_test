@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+var categories = require('../categories')
 
 router.get('/categories', async (req, res, next) => {
   try {
-    res.status(200).json({ message: "page available" });
+    await categories.initialize()
+    res.status(200).json(categories.getAggregatedList());
   } catch (err) {
     return next(err);
   }
