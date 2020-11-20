@@ -90,5 +90,20 @@ describe('Insights Service', () => {
         expect(months.allDates.sort).to.equal(allMonths.sort)
       })
     })
+
+    context('get breakdown of spending by month', () => {
+      const firstResult = {
+        "10/01/2020": {
+          "totalNumber":22,
+          "totalValue":2923,
+          "averageValue":132.86363636363637
+        }
+      }
+      it('returns aggregated list of spending by month', async () => {
+        await months.initialize()
+        const firstResultFromList = JSON.stringify(months.getAggregatedList()[0])
+        expect(firstResultFromList).to.equal(JSON.stringify(firstResult))
+      })
+    })
   });
 });
