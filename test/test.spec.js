@@ -81,6 +81,21 @@ describe('Insights Service', () => {
         const response = await request('/cashflow');
         response.statusCode.should.equal(200);
       });
+
+      it('returns json data of aggregated months', async () => {
+        const response = await request('/cashflow');
+        const data = response.body
+
+        const result = {
+          "10/01/2020": {
+            "totalNumber":22,
+            "totalValue":2923,
+            "averageValue":132.86363636363637
+          }
+        }
+
+        expect(JSON.stringify(data).includes(JSON.stringify(result))).to.equal(true)
+      });
     });
 
     context('get months', () => {

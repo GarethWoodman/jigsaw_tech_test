@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 var categories = require('../controllers/categories')
+var months = require('../controllers/months')
 
 router.get('/categories', async (req, res, next) => {
   try {
@@ -13,7 +14,8 @@ router.get('/categories', async (req, res, next) => {
 
 router.get('/cashflow', async (req, res, next) => {
   try {
-    res.status(200).json({ message: 'Page available' });
+    await months.initialize()
+    res.status(200).json(months.getAggregatedList());
   } catch (err) {
     return next(err);
   }
