@@ -4,6 +4,7 @@ const rp = require('request-promise');
 
 const api = require('../src/api')
 const categories = require('../src/controllers/categories')
+const months = require('../src/controllers/months')
 
 chai.should();
 
@@ -81,5 +82,13 @@ describe('Insights Service', () => {
         response.statusCode.should.equal(200);
       });
     });
+
+    context('get months', () => {
+      const allMonths = ['10/01/2020', '11/01/2020']
+      it('has all months', async () => {
+        await months.initialize()
+        expect(months.allDates.sort).to.equal(allMonths.sort)
+      })
+    })
   });
 });
