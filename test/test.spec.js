@@ -1,7 +1,9 @@
 const { expect } = require('chai');
 const chai = require('chai');
 const rp = require('request-promise');
+
 const api = require('../src/api')
+const categories = require('../src/categories')
 
 chai.should();
 
@@ -30,6 +32,15 @@ describe('Insights Service', () => {
         response.statusCode.should.equal(200);
       });
     });
+
+    context('get categories', async () => {
+      await categories.initialize()
+      const allCategories = ['Food', 'Miscellaneous', 'Charity', 'Travel', 'Transport']
+
+      it('has all categories', async () => {
+        expect(categories.getAll()).to.equal(allCategories)
+      })
+    })
   });
 
   describe('/cashflow', () => {
