@@ -33,12 +33,28 @@ describe('Insights Service', () => {
       });
     });
 
-    context('get categories', async () => {
-      await categories.initialize()
+    context('get categories', () => {      
       const allCategories = ['Food', 'Miscellaneous', 'Charity', 'Travel', 'Transport']
 
       it('has all categories', async () => {
-        expect(categories.allNames).to.equal(allCategories)
+        await categories.initialize()
+        expect(categories.allNames.sort).to.equal(allCategories.sort)
+      })
+    })
+
+    context('get aggregated List', () => {
+      const firstResult = {
+        "Food": {
+          "totalNumber":24,
+          "totalValue":2679,
+          "averageValue":111.625
+        }
+      }
+
+      it('returns aggregated list of first category', async () => {
+        await categories.initialize()
+        const firstResultFromList = JSON.stringify(categories.getAggregatedList()[0])
+        expect(firstResultFromList).to.equal(JSON.stringify(firstResult))
       })
     })
   });
