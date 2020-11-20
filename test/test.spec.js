@@ -38,7 +38,7 @@ describe('Insights Service', () => {
       const allCategories = ['Food', 'Miscellaneous', 'Charity', 'Travel', 'Transport']
 
       it('has all categories', async () => {
-        expect(categories.getAll()).to.equal(allCategories)
+        expect(categories.allNames).to.equal(allCategories)
       })
     })
   });

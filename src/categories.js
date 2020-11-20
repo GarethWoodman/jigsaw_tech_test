@@ -4,9 +4,10 @@ class Categories {
   static async initialize(){
     await api.getData()
     this.records = api.data
+    this.allNames = this._getNames()
   }
 
-  static getAll(){
+  static _getNames(){
     let categories = []
 
     this.records.forEach(function (record, index){
@@ -16,7 +17,8 @@ class Categories {
     })
 
     return categories
-  } 
+  }
+   
 }
 
 module.exports = Categories;
