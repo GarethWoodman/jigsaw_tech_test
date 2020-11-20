@@ -38,8 +38,8 @@ class Dates {
 
     // Start from the first day of the first month
     let start = new Date(this.startDate.getFullYear() + "-" + (this.startDate.getMonth() + 1 ) + "-01")
-    // End on the final day of the last month
-    let end = new Date(this.endDate.getFullYear() + "-" + (this.endDate.getMonth() + 2 ) + "-01")
+    // End on the final date
+    let end = new Date(this.endDate.getFullYear() + "-" + ( this.endDate.getMonth() + 1 ) + "-" + ( this.endDate.getDate() + 1) )
 
     // Get all possible dates from start to end
     for(var dates=[],date=new Date(start); date<=end; date.setDate(date.getDate()+1)){

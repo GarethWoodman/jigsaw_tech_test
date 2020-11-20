@@ -95,7 +95,7 @@ describe('Insights Service', () => {
 
     context('gets dates', () => {
       const firstDate = '01/10/2020'
-      const lastDate = '01/11/2020'
+      const lastDate = '04/11/2020'
 
       it('has first date', () => {
         expect(months.allDates.includes(firstDate)).to.equal(true)
