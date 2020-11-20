@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-var categories = require('../categories')
+var categories = require('../controllers/categories')
 
 router.get('/categories', async (req, res, next) => {
   try {

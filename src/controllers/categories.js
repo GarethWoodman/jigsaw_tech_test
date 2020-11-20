@@ -1,4 +1,4 @@
-const api = require('./api')
+const api = require('../api')
 
 class Categories {
   static async initialize(){

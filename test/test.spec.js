@@ -3,7 +3,7 @@ const chai = require('chai');
 const rp = require('request-promise');
 
 const api = require('../src/api')
-const categories = require('../src/categories')
+const categories = require('../src/controllers/categories')
 
 chai.should();
 
