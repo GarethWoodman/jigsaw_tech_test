@@ -19,6 +19,11 @@ async function request(path) {
 }
 
 describe('Insights Service', () => {
+  beforeEach( async function() {
+    await months.initialize()
+    await categories.initialize()
+  });
+
   describe('Api', () => {
     it('gets data from API', async () => {
       await api.getData()
@@ -27,6 +32,15 @@ describe('Insights Service', () => {
   })
 
   describe('/categories', () => {
+    let categoryRecord = {
+      "Food": {
+        "totalNumber":24,
+        "totalValue":2679,
+        "averageValue":111.625
+      }
+    }
+    categoryRecord = JSON.stringify(categoryRecord)
+
     context('gets page', () => {
       it('returns 200', async () => {
         const response = await request('/categories');
@@ -35,17 +49,8 @@ describe('Insights Service', () => {
 
       it('returns json data of aggregated categories', async () => {
         const response = await request('/categories');
-        const data = response.body
-
-        const result = {
-          "Food": {
-            "totalNumber":24,
-            "totalValue":2679,
-            "averageValue":111.625
-          }
-        }
-
-        expect(JSON.stringify(data).includes(JSON.stringify(result))).to.equal(true)
+        const data = JSON.stringify(response.body)
+        expect(data.includes(categoryRecord)).to.equal(true)
       });
     });
 
@@ -53,29 +58,28 @@ describe('Insights Service', () => {
       const allCategories = ['Food', 'Miscellaneous', 'Charity', 'Travel', 'Transport']
 
       it('has all categories', async () => {
-        await categories.initialize()
         expect(categories.allNames.sort).to.equal(allCategories.sort)
       })
     })
 
     context('get aggregated List', () => {
-      const firstResult = {
-        "Food": {
-          "totalNumber":24,
-          "totalValue":2679,
-          "averageValue":111.625
-        }
-      }
-
       it('returns aggregated list of first category', async () => {
-        await categories.initialize()
-        const firstResultFromList = JSON.stringify(categories.getAggregatedList()[0])
-        expect(firstResultFromList).to.equal(JSON.stringify(firstResult))
+        const resultFromCategories = JSON.stringify(categories.getAggregatedList()[0])
+        expect(resultFromCategories).to.equal(categoryRecord)
       })
     })
   });
 
   describe('/cashflow', () => {
+    let monthRecord = {
+      "10/01/2020": {
+        "totalNumber":22,
+        "totalValue":2923,
+        "averageValue":132.86363636363637
+      }
+    }
+    monthRecord = JSON.stringify(monthRecord)
+
     context('gets page', () => {
       it('returns 200', async () => {
         const response = await request('/cashflow');
@@ -84,40 +88,22 @@ describe('Insights Service', () => {
 
       it('returns json data of aggregated months', async () => {
         const response = await request('/cashflow');
-        const data = response.body
-
-        const result = {
-          "10/01/2020": {
-            "totalNumber":22,
-            "totalValue":2923,
-            "averageValue":132.86363636363637
-          }
-        }
-
-        expect(JSON.stringify(data).includes(JSON.stringify(result))).to.equal(true)
+        const data = JSON.stringify(response.body)
+        expect(data.includes(monthRecord)).to.equal(true)
       });
     });
 
     context('get months', () => {
       const allMonths = ['10/01/2020', '11/01/2020']
-      it('has all months', async () => {
-        await months.initialize()
+      it('has all months', () => {
         expect(months.allDates.sort).to.equal(allMonths.sort)
       })
     })
 
     context('get breakdown of spending by month', () => {
-      const firstResult = {
-        "10/01/2020": {
-          "totalNumber":22,
-          "totalValue":2923,
-          "averageValue":132.86363636363637
-        }
-      }
-      it('returns aggregated list of spending by month', async () => {
-        await months.initialize()
-        const firstResultFromList = JSON.stringify(months.getAggregatedList()[0])
-        expect(firstResultFromList).to.equal(JSON.stringify(firstResult))
+      it('returns aggregated list of spending by month', () => {
+        const resultFromMonths = JSON.stringify(months.getAggregatedList()[0])
+        expect(resultFromMonths).to.equal(monthRecord)
       })
     })
   });
