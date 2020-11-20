@@ -93,10 +93,15 @@ describe('Insights Service', () => {
       });
     });
 
-    context('get months', () => {
-      const allMonths = ['10/01/2020', '11/01/2020']
-      it('has all months', () => {
-        expect(months.allDates.sort).to.equal(allMonths.sort)
+    context('get dates', () => {
+      const firstDate = '01/10/2020'
+      const lastDate = '01/11/2020'
+
+      it('has first date', () => {
+        expect(months.allDates.includes(firstDate)).to.equal(true)
+      })
+      it('has first date', () => {
+        expect(months.allDates.includes(lastDate)).to.equal(true)
       })
     })
 
