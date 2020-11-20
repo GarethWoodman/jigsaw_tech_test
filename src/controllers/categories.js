@@ -1,4 +1,5 @@
 const api = require('../api')
+const values = require('../helpers/values')
 
 class Categories {
   static async initialize(){
@@ -11,25 +12,14 @@ class Categories {
     let records = this.records
     let results = []
 
-    this.allNames.forEach(function (category, index){
-      let totalNumber = 0
-      let totalValue = 0
+    this.allNames.forEach(function (category){
+      values.reset()
    
-      records.forEach(function (record, index){
-        if(record['category'] == category){ 
-          totalNumber += 1
-          totalValue += record['amount']
-        }
+      records.forEach(function (record){
+        if(record['category'] == category){ values.add(record['amount']) }
       })
    
-      // Push result into list of results
-      var result = {}
-      result[category] = {
-        "totalNumber": totalNumber, 
-        "totalValue": totalValue, 
-        "averageValue": (totalValue / totalNumber)
-      }
-       results.push(result)
+      results.push(values.getResult(category))
      })
 
     return results
