@@ -3,7 +3,7 @@ var fetch = require('cross-fetch');
 
 class Api {
   static async getData(){
-    const url = "http://54.154.227.172:3000/transactions"
+    const url = "https://transactions-jigsaw.herokuapp.com/transactions"
     const response = await fetch(url)
     this.data = await response.json()
   }

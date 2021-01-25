@@ -4,7 +4,7 @@
   "description": "Recruitment Project",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.ts",
     "test": "./test/test.sh"
   },
   "author": "jigsaw.xyz",
